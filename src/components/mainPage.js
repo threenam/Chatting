@@ -8,6 +8,7 @@ function MainPage() {
   const curEffect = useRef();
   const input = useRef();
   const textBox = useRef();
+  const edit = useRef([]);
   const [inputText, setInputText] = useState("");
   const [chatList, setChatList] = useState([]);
 
@@ -28,12 +29,17 @@ function MainPage() {
   const click = () => {
     curEffect.current.style.transitionTimingFunction = "ease-out";
     curEffect.current.style.transitionDuration = "0.05s";
+    for (let i = 0; i < chatList.length; i++) {
+      edit.current[i].style.opacity = "0";
+    }
 
     for (let i = 110; i >= 10; i--) {
       setTimeout(() => {
         curEffect.current.style.transform = `scale(${(100 - i) * 0.03})`;
       }, 1.5 * i);
     }
+
+    console.log(edit);
   };
 
   //클릭이펙트 함수 실행
@@ -49,13 +55,26 @@ function MainPage() {
     setInputText(e.target.value);
   };
 
+  const showEdit = (e) => {
+    edit.current[e.chatid].style.opacity = "1";
+  };
+
   const sendMessage = () => {
     if (inputText !== "") {
       setChatList(
         chatList.concat(
           <M.chatting>
             {inputText}
-            <M.editDiv>wefewfew</M.editDiv>
+            <M.editDiv onClick={showEdit}>
+              <M.showEdit></M.showEdit>
+              <M.showEdit></M.showEdit>
+              <M.showEdit></M.showEdit>
+            </M.editDiv>
+            <M.edit ref={(el) => (edit.current[chatList.length] = el)}>
+              <M.editBtn>삭제</M.editBtn>
+              <M.editBtn>보기</M.editBtn>
+              <M.editBtn>신고</M.editBtn>
+            </M.edit>
           </M.chatting>
         )
       );

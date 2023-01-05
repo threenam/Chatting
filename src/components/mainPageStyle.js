@@ -1,10 +1,34 @@
 import styled from "styled-components";
+import { keyframes } from "styled-components";
+
+const popChat = keyframes`
+  from {
+    max-width: 0;
+    height: 5;
+    opacity: 0;
+    padding: 0px;
+  }
+
+  to {
+    max-width: 40%;
+    padding: 10px;
+    width: max-content;
+    opacity: 1;
+    }
+`;
 
 export const container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: gray;
+  background-image: linear-gradient(
+    to right,
+    rgb(151, 151, 240),
+    rgb(118, 118, 215),
+    rgb(100, 100, 218),
+    rgb(81, 81, 210),
+    rgb(50, 50, 207)
+  );
   justify-content: center;
   align-items: center;
   cursor: none;
@@ -30,12 +54,18 @@ export const navElement = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  color: gray;
   transition-timing-function: ease-out;
   transition-duration: 0.75s;
+  background-image: none;
 
   :hover {
-    background-color: gray;
+    background-image: linear-gradient(
+      to right,
+      rgb(151, 151, 240),
+      rgb(118, 118, 215),
+      rgb(100, 100, 218)
+    );
     transition-duration: 0.15s;
     color: white;
   }
@@ -47,7 +77,7 @@ export const curEffect = styled.div`
   width: 15px;
   height: 15px;
   pointer-events: none;
-  background-color: #555555;
+  background-color: black;
   transform: scale(0.4);
   opacity: 0;
   z-index: 3;
@@ -56,7 +86,6 @@ export const curEffect = styled.div`
 export const chatBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border-top: 5px solid white;
   border-radius: 10px;
   margin-top: 5%;
   width: 35%;
@@ -64,7 +93,7 @@ export const chatBox = styled.div`
   justify-content: center;
   align-content: center;
   box-sizing: border-box;
-  box-shadow: 40px 20px 2px #000000;
+  box-shadow: 7px 10px 2px #182847;
 `;
 
 export const textBox = styled.div`
@@ -80,29 +109,88 @@ export const textBox = styled.div`
   scroll-behavior: smooth;
 `;
 
+export const editDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  flex-wrap: wrap;
+  width: 7px;
+  height: 24px;
+  right: -15px;
+  bottom: 0;
+  overflow: hidden;
+  justify-content: right;
+  opacity: 0;
+  transition-timing-function: ease-out;
+  transition-duration: 0.25s;
+`;
+
+export const showEdit = styled.div`
+  width: 4px;
+  height: 4px;
+  background-color: gray;
+  border-radius: 50%;
+`;
+
+export const edit = styled.div`
+  position: absolute;
+  display: flex;
+  right: -40px;
+  opacity: 1;
+  bottom: 0;
+  width: 35px;
+  height: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 10px;
+`;
+
+export const editBtn = styled.div`
+  height: 33.333333333333333333333333333%;
+  width: 90%;
+  text-align: center;
+  background-image: linear-gradient(
+    to right,
+    rgb(151, 151, 240),
+    rgb(118, 118, 215),
+    rgb(100, 100, 218)
+  );
+  :hover {
+    background-image: linear-gradient(
+      to right,
+      rgb(81, 81, 210),
+      rgb(50, 50, 207)
+    );
+  }
+`;
+
 export const chatting = styled.div`
   position: relative;
   display: flex;
   width: max-content;
   max-width: 40%;
   padding: 10px;
+  opacity: 0;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-image: linear-gradient(
+    to right,
+    rgb(81, 81, 210),
+    rgb(50, 50, 207)
+  );
   color: white;
-  box-shadow: 8px 4px 1px #666666;
+  box-shadow: 3px 2px 3px gray;
   border-radius: 10px;
   font-weight: 600;
-`;
 
-export const editDiv = styled.div`
-  display: flex;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: blue;
-  left: 110%;
-  top: 20%;
+  animation: ${popChat} 0.05s ease-out;
+  animation-fill-mode: forwards;
+
+  :hover {
+    ${editDiv} {
+      opacity: 1;
+    }
+  }
 `;
 
 export const inputbox = styled.div`
@@ -111,25 +199,33 @@ export const inputbox = styled.div`
   height: 7%;
   border: 5px solid white;
   border-radius: 0px 0px 10px 10px;
-  background-color: black;
+  background-color: white;
 `;
 
 export const input = styled.input`
   width: 91%;
   height: 95%;
   border: none;
-  border-radius: 0px 0px 0px 10px;
-  background-color: black;
+  border-radius: 0px 0px 0px 7px;
+  background-image: linear-gradient(
+    to right,
+    rgb(151, 151, 240),
+    rgb(118, 118, 215),
+    rgb(100, 100, 218)
+  );
+  padding-left: 2%;
   color: white;
   outline: none;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 14px;
+  font-family: "맑은 고딕";
   :hover {
     cursor: none;
   }
   ::placeholder {
-    opacity: 0.5;
     font-size: 12px;
+    color: white;
+    font-family: "맑은 고딕";
   }
 `;
 
@@ -141,14 +237,19 @@ export const submitBtn = styled.div`
   font-weight: 600;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-image: linear-gradient(
+    to right,
+    rgb(100, 100, 218),
+    rgb(81, 81, 210),
+    rgb(50, 50, 207)
+  );
   color: white;
-  border-radius: 10px 0px 5px 10px;
+  border-radius: 0px 0px 7px 0px;
   transition-timing-function: ease-out;
   transition-duration: 0.75s;
 
   :hover {
-    background-color: white;
+    background-color: #d3d3d3;
     transition-duration: 0.15s;
     color: black;
   }
