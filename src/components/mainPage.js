@@ -29,6 +29,8 @@ function MainPage() {
   const click = () => {
     curEffect.current.style.transitionTimingFunction = "ease-out";
     curEffect.current.style.transitionDuration = "0.05s";
+
+    //최적화 안됨. 채팅많아지면 렉 ㅈㄴ걸림.
     for (let i = 0; i < chatList.length; i++) {
       edit.current[i].style.opacity = "0";
     }
@@ -38,8 +40,6 @@ function MainPage() {
         curEffect.current.style.transform = `scale(${(100 - i) * 0.03})`;
       }, 1.5 * i);
     }
-
-    console.log(edit);
   };
 
   //클릭이펙트 함수 실행
@@ -65,7 +65,7 @@ function MainPage() {
         chatList.concat(
           <M.chatting>
             {inputText}
-            <M.editDiv onClick={showEdit}>
+            <M.editDiv onClick={showEdit} chatid={chatList.length}>
               <M.showEdit></M.showEdit>
               <M.showEdit></M.showEdit>
               <M.showEdit></M.showEdit>
