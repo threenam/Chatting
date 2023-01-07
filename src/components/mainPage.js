@@ -9,6 +9,7 @@ function MainPage() {
   const input = useRef();
   const textBox = useRef();
   const edit = useRef([]);
+  const editDiv = useRef();
   const [inputText, setInputText] = useState("");
   const [chatList, setChatList] = useState([]);
 
@@ -56,8 +57,11 @@ function MainPage() {
   };
 
   const showEdit = (e) => {
-    edit.current[e.chatid].style.opacity = "1";
+    edit.current[e.chatid - 1].style.opacity = "1";
+    console.log(e.chatid);
   };
+
+  editDiv.current.onclick = showEdit;
 
   const sendMessage = () => {
     if (inputText !== "") {
@@ -65,7 +69,7 @@ function MainPage() {
         chatList.concat(
           <M.chatting>
             {inputText}
-            <M.editDiv onClick={showEdit} chatid={chatList.length}>
+            <M.editDiv ref={editDiv} onClick={showEdit} chatid={chatList.length}>
               <M.showEdit></M.showEdit>
               <M.showEdit></M.showEdit>
               <M.showEdit></M.showEdit>
