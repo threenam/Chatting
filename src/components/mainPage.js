@@ -5,41 +5,17 @@ function MainPage() {
   //예시 응답 변수
 
   const navBar = useRef();
-  const curEffect = useRef();
   const input = useRef();
   const textBox = useRef();
   const edit = useRef([]);
-  const editDiv = useRef();
   const [inputText, setInputText] = useState("");
   const [chatList, setChatList] = useState([]);
 
-  document.addEventListener("mousemove", function (e) {
-    if (e.clientY >= 40) {
-      navBar.current.style.top = "-80";
-    }
-    if (e.clientY <= 40) {
-      navBar.current.style.top = "0";
-    }
-
-    curEffect.current.style.top = `${e.clientY - 7}px`;
-    curEffect.current.style.left = `${e.clientX - 7}px`;
-    curEffect.current.style.opacity = "1";
-  });
-
   //클릭이펙트 함수
   const click = () => {
-    curEffect.current.style.transitionTimingFunction = "ease-out";
-    curEffect.current.style.transitionDuration = "0.05s";
-
     //최적화 안됨. 채팅많아지면 렉 ㅈㄴ걸림.
     for (let i = 0; i < chatList.length; i++) {
       edit.current[i].style.opacity = "0";
-    }
-
-    for (let i = 110; i >= 10; i--) {
-      setTimeout(() => {
-        curEffect.current.style.transform = `scale(${(100 - i) * 0.03})`;
-      }, 1.5 * i);
     }
   };
 
@@ -56,12 +32,11 @@ function MainPage() {
     setInputText(e.target.value);
   };
 
-  const showEdit = (e) => {
-    edit.current[e.chatid - 1].style.opacity = "1";
-    console.log(e.chatid);
+  const showEdit = () => {
+    for (let i = 0; i < chatList.length; i++) {
+      edit.current[i].style.opacity = "1";
+    }
   };
-
-  editDiv.current.onclick = showEdit;
 
   const sendMessage = () => {
     if (inputText !== "") {
@@ -69,7 +44,7 @@ function MainPage() {
         chatList.concat(
           <M.chatting>
             {inputText}
-            <M.editDiv ref={editDiv} onClick={showEdit} chatid={chatList.length}>
+            <M.editDiv onClick={showEdit()}>
               <M.showEdit></M.showEdit>
               <M.showEdit></M.showEdit>
               <M.showEdit></M.showEdit>
@@ -99,7 +74,6 @@ function MainPage() {
 
   return (
     <M.container>
-      <M.curEffect ref={curEffect}></M.curEffect>
       <M.navBar ref={navBar}>
         <M.navElement>About</M.navElement>
         <M.navElement>Donate</M.navElement>

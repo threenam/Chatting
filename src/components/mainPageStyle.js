@@ -31,7 +31,6 @@ export const container = styled.div`
   );
   justify-content: center;
   align-items: center;
-  cursor: none;
 `;
 
 export const navBar = styled.div`
@@ -69,18 +68,6 @@ export const navElement = styled.div`
     transition-duration: 0.15s;
     color: white;
   }
-`;
-
-export const curEffect = styled.div`
-  position: absolute;
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  pointer-events: none;
-  background-color: black;
-  transform: scale(0.4);
-  opacity: 0;
-  z-index: 3;
 `;
 
 export const chatBox = styled.div`
