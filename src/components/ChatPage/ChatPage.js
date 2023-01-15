@@ -1,7 +1,7 @@
-import * as M from "./mainPageStyle";
+import * as C from "./ChatPageStyle.js";
 import { useRef, useState, useEffect } from "react";
 
-function MainPage() {
+function ChatPage() {
   //예시 응답 변수
 
   const navBar = useRef();
@@ -42,19 +42,19 @@ function MainPage() {
     if (inputText !== "") {
       setChatList(
         chatList.concat(
-          <M.chatting>
+          <C.chatting>
             {inputText}
-            <M.editDiv onClick={showEdit()}>
-              <M.showEdit></M.showEdit>
-              <M.showEdit></M.showEdit>
-              <M.showEdit></M.showEdit>
-            </M.editDiv>
-            <M.edit ref={(el) => (edit.current[chatList.length] = el)}>
-              <M.editBtn>삭제</M.editBtn>
-              <M.editBtn>보기</M.editBtn>
-              <M.editBtn>신고</M.editBtn>
-            </M.edit>
-          </M.chatting>
+            <C.editDiv onClick={showEdit()}>
+              <C.showEdit></C.showEdit>
+              <C.showEdit></C.showEdit>
+              <C.showEdit></C.showEdit>
+            </C.editDiv>
+            <C.edit ref={(el) => (edit.current[chatList.length] = el)}>
+              <C.editBtn>삭제</C.editBtn>
+              <C.editBtn>보기</C.editBtn>
+              <C.editBtn>신고</C.editBtn>
+            </C.edit>
+          </C.chatting>
         )
       );
       setInputText("");
@@ -73,15 +73,15 @@ function MainPage() {
   }, []);
 
   return (
-    <M.container>
-      <M.navBar ref={navBar}>
-        <M.navElement>About</M.navElement>
-        <M.navElement>Donate</M.navElement>
-      </M.navBar>
-      <M.chatBox>
-        <M.textBox ref={textBox}>{chatList}</M.textBox>
-        <M.inputbox>
-          <M.input
+    <C.container>
+      <C.navBar ref={navBar}>
+        <C.navElement>About</C.navElement>
+        <C.navElement>Donate</C.navElement>
+      </C.navBar>
+      <C.chatBox>
+        <C.textBox ref={textBox}>{chatList}</C.textBox>
+        <C.inputbox>
+          <C.input
             ref={input}
             onChange={onChange}
             placeholder={"대화내용을 입력해주세요!"}
@@ -90,12 +90,12 @@ function MainPage() {
                 if (e.target.value !== "") sendMessage();
               }
             }}
-          ></M.input>
-          <M.submitBtn onClick={sendMessage}>보내기!</M.submitBtn>
-        </M.inputbox>
-      </M.chatBox>
-    </M.container>
+          ></C.input>
+          <C.submitBtn onClick={sendMessage}>보내기!</C.submitBtn>
+        </C.inputbox>
+      </C.chatBox>
+    </C.container>
   );
 }
 
-export default MainPage;
+export default ChatPage;
